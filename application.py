@@ -8,7 +8,7 @@ application = Flask(__name__)
 app = application
 
 # scaler = pickle.load(open("/config/workspace/Model/standardScalar.pkl", "rb"))
-model =  pickle.load(open("/config/workspace/Model/random_forest_emotion_model.pkl", "rb"))
+model =  pickle.load(open("/config/workspace/Model/RF_58.pkl", "rb"))
 
 ## Rout for home page
 
@@ -23,21 +23,21 @@ def predict_datapoint():
 
     if request.method=='POST':
 
-        Pulse_BPM=int(request.form.get("Pulse(BPM)"))
+     Pulse_BPM=int(request.form.get("Pulse (BPM)"))
 
-        Temperature = float(request.form.get('Temperature'))
+     Temperature = float(request.form.get('Temperature'))
 
-        GSR = float(request.form.get('GSR'))
+     GSR = float(request.form.get('GSR'))
 
-        new_data=([[Pulse_BPM, Temperature, GSR]])
-        predict=model.predict(new_data)
+     new_data=([[Pulse_BPM, Temperature, GSR]])
+     predict=model.predict(new_data)
 
-        result = predict[0]
+     result = predict[0]
             
-        return render_template('Emotion_Predicted.html',result=result)
+     return render_template('Emotion_Predicted.html',result=result)
 
     else:
-        return render_template('home.html')
+     return render_template('home.html')
 
 
 if __name__=="__main__":
